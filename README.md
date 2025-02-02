@@ -16,7 +16,7 @@ Developed a Tableau Dashboard.
 
 ## 🛠️ Technology Stack
 
-Data Collection: Selenium, BeautifulSoup
+Data Collection: Selenium
 
 Processing & ML: Pandas, NumPy, XGBoost
 
