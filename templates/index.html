@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Match Prediction</title>
+</head>
+<body>
+    <h1>Cricket Match Prediction</h1>
+    <form action="/predict" method="POST">
+        <label for="Batting Team">Batting Team:</label>
+        <select name="Batting Team">
+            {% for team in batting_teams %}
+                <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="Balling Team">Balling Team:</label>
+        <select name="Balling Team">
+            {% for team in bowling_teams %}
+                <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="Venue">Venue:</label>
+        <select name="Venue">
+            {% for venue in venues %}
+                <option value="{{ venue }}">{{ venue }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="Pitch Type">Pitch Type:</label>
+        <select name="Pitch Type">
+            {% for pitch in pitch_types %}
+                <option value="{{ pitch }}">{{ pitch }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="Match Date">Match Date:</label>
+        <input type="date" name="Match Date" required><br><br>
+
+        <label for="Over number">Over Number:</label>
+        <input type="number" name="Over number" min="1" max="50" required><br><br>
+
+        <label for="score after over">Score after Over:</label>
+        <input type="number" name="score after over" step="0.1" required><br><br>
+
+        <label for="wickets after over">Wickets after Over:</label>
+        <input type="number" name="wickets after over" min="0" max="11" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <h2>{{ prediction_text }}</h2>
+    {% endif %}
+    {% if error_message %}
+        <h2>{{ error_message }}</h2>
+    {% endif %}
+</body>
+</html>
