@@ -22,4 +22,4 @@ To build a model that predicts the inning score of a match based on match condit
 
 - Flask Web App: Predicts match scores.
 - AWS Hosting: Ensures availability.
-- Tableau Dashboard: [View Here](https://public.tableau.com/views/project_workbook_17350676366020/VenueVsInningScore?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+- Tableau Dashboard: [View Here](https://public.tableau.com/views/ipl_project_17351555949170/Dashboard2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
