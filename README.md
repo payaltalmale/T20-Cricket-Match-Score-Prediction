@@ -25,7 +25,7 @@ To build a model that predicts the inning score of a match based on match condit
 - Tableau Dashboard: [View Here](https://public.tableau.com/views/ipl_project_17351555949170/Dashboard2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
   ![image](https://github.com/user-attachments/assets/32de0c47-32df-4331-8937-fb80012a7c96)
-  ![image](https://github.com/user-attachments/assets/98ed0f21-6681-410b-b3d2-e3058dee91d9)
+  
 
 
 
