@@ -24,5 +24,6 @@ To build a model that predicts the inning score of a match based on match condit
 - AWS Hosting: Ensures availability.
 - Tableau Dashboard: [View Here](https://public.tableau.com/views/ipl_project_17351555949170/Dashboard2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
-- ![image](https://github.com/user-attachments/assets/ac1218c9-0314-4150-be6a-c11378c4df40)
+- ![image](https://github.com/user-attachments/assets/63932cff-ff26-4592-af26-8330c9a0e959)
+
 
