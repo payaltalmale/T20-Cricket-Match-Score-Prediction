@@ -4,58 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cricket Match Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #0e3b43, #1c768f);
+            color: white;
+            padding: 10px;
+            margin: 0;
+            overflow: hidden; /* Prevent page scroll */
+        }
+        h1 {
+            color: #f8f9fa;
+            font-size: 24px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 450px;
+            margin: 30px auto;
+            max-height: calc(100vh - 100px); /* Adjust container height */
+            overflow-y: auto; /* Enable scrolling */
+            -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+            scrollbar-width: none; /* Hide scrollbar in Firefox */
+        }
+        .container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar in Chrome, Safari, and Opera */
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .logo {
+            width: 90px;
+            height: auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .form-group {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+            font-size: 14px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .error-message {
+            color: #ff4d4d;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Cricket Match Prediction</h1>
-    <form action="/predict" method="POST">
-        <label for="Batting Team">Batting Team:</label>
-        <select name="Batting Team">
-            {% for team in batting_teams %}
-                <option value="{{ team }}">{{ team }}</option>
-            {% endfor %}
-        </select><br><br>
 
-        <label for="Balling Team">Balling Team:</label>
-        <select name="Balling Team">
-            {% for team in bowling_teams %}
-                <option value="{{ team }}">{{ team }}</option>
-            {% endfor %}
-        </select><br><br>
+    <div class="container">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Cricket Prediction Logo" class="logo">
+        </div>
 
-        <label for="Venue">Venue:</label>
-        <select name="Venue">
-            {% for venue in venues %}
-                <option value="{{ venue }}">{{ venue }}</option>
-            {% endfor %}
-        </select><br><br>
+        <h1>Cricket Match Prediction</h1>
 
-        <label for="Pitch Type">Pitch Type:</label>
-        <select name="Pitch Type">
-            {% for pitch in pitch_types %}
-                <option value="{{ pitch }}">{{ pitch }}</option>
-            {% endfor %}
-        </select><br><br>
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="Batting Team">Batting Team:</label>
+                <select name="Batting Team">
+                    {% for team in batting_teams %}
+                        <option value="{{ team }}">{{ team }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <label for="Match Date">Match Date:</label>
-        <input type="date" name="Match Date" required><br><br>
+            <div class="form-group">
+                <label for="Balling Team">Balling Team:</label>
+                <select name="Balling Team">
+                    {% for team in bowling_teams %}
+                        <option value="{{ team }}">{{ team }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <label for="Over number">Over Number:</label>
-        <input type="number" name="Over number" min="1" max="50" required><br><br>
+            <div class="form-group">
+                <label for="Venue">Venue:</label>
+                <select name="Venue">
+                    {% for venue in venues %}
+                        <option value="{{ venue }}">{{ venue }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <label for="score after over">Score after Over:</label>
-        <input type="number" name="score after over" step="0.1" required><br><br>
+            <div class="form-group">
+                <label for="Pitch Type">Pitch Type:</label>
+                <select name="Pitch Type">
+                    {% for pitch in pitch_types %}
+                        <option value="{{ pitch }}">{{ pitch }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <label for="wickets after over">Wickets after Over:</label>
-        <input type="number" name="wickets after over" min="0" max="11" required><br><br>
+            <div class="form-group">
+                <label for="Match Date">Match Date:</label>
+                <input type="date" name="Match Date" required>
+            </div>
 
-        <button type="submit">Predict</button>
-    </form>
+            <div class="form-group">
+                <label for="Over number">Over Number:</label>
+                <input type="number" name="Over number" min="1" max="50" required>
+            </div>
 
-    {% if prediction_text %}
-        <h2>{{ prediction_text }}</h2>
-    {% endif %}
-    {% if error_message %}
-        <h2>{{ error_message }}</h2>
-    {% endif %}
+            <div class="form-group">
+                <label for="score after over">Score after Over:</label>
+                <input type="number" name="score after over" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="wickets after over">Wickets after Over:</label>
+                <input type="number" name="wickets after over" min="0" max="10" required>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        {% endif %}
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+    </div>
+
 </body>
 </html>
