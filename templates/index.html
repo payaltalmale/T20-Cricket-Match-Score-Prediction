@@ -12,7 +12,7 @@
             color: white;
             padding: 10px;
             margin: 0;
-            overflow: hidden; /* Prevent page scroll */
+            overflow: hidden;
         }
         h1 {
             color: #f8f9fa;
@@ -26,13 +26,13 @@
             width: 90%;
             max-width: 450px;
             margin: 30px auto;
-            max-height: calc(100vh - 100px); /* Adjust container height */
-            overflow-y: auto; /* Enable scrolling */
-            -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
-            scrollbar-width: none; /* Hide scrollbar in Firefox */
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
         .container::-webkit-scrollbar {
-            display: none; /* Hide scrollbar in Chrome, Safari, and Opera */
+            display: none;
         }
         .logo-container {
             display: flex;
@@ -85,7 +85,15 @@
         .error-message {
             color: #ff4d4d;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 5px;
+            display: none;
+        }
+        .reload-button {
+            background-color: #dc3545;
+            margin-top: 5px;
+        }
+        .reload-button:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
@@ -137,7 +145,8 @@
 
             <div class="form-group">
                 <label for="Match Date">Match Date:</label>
-                <input type="date" name="Match Date" required>
+                <input type="date" name="Match Date" id="matchDate" required>
+                <p class="error-message" id="dateError">⚠️ Matches are not conducted in December, January, or February. Please select a valid date.</p>
             </div>
 
             <div class="form-group">
@@ -147,7 +156,7 @@
 
             <div class="form-group">
                 <label for="score after over">Score after Over:</label>
-                <input type="number" name="score after over" step="0.1" required>
+                <input type="number" name="score after over" step="1" required>
             </div>
 
             <div class="form-group">
@@ -155,8 +164,12 @@
                 <input type="number" name="wickets after over" min="0" max="10" required>
             </div>
 
-            <button type="submit">Predict</button>
+            <button type="submit" id="predictButton">Predict</button>
         </form>
+
+        <a href="/">
+            <button class="reload-button">Reload</button>
+        </a>
 
         {% if prediction_text %}
             <h2>{{ prediction_text }}</h2>
@@ -165,6 +178,24 @@
             <p class="error-message">{{ error_message }}</p>
         {% endif %}
     </div>
+
+    <script>
+        document.getElementById("matchDate").addEventListener("change", function() {
+            let selectedDate = new Date(this.value);
+            let month = selectedDate.getMonth() + 1;  // JavaScript months are 0-based
+
+            let errorElement = document.getElementById("dateError");
+            let predictButton = document.getElementById("predictButton");
+
+            if (month === 12 || month === 1 || month === 2) {
+                errorElement.style.display = "block";  // Show error message
+                predictButton.disabled = true;         // Disable Predict button
+            } else {
+                errorElement.style.display = "none";   // Hide error message
+                predictButton.disabled = false;        // Enable Predict button
+            }
+        });
+    </script>
 
 </body>
 </html>
