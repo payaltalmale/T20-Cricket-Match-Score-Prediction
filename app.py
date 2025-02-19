@@ -147,6 +147,14 @@ def predict():
         predicted_inning_score = model.predict(input_data)
         rounded_score = round(predicted_inning_score[0])  # Round to nearest integer
 
+        # Ensure predicted score is always greater than current score if overs < 20
+        if over_number < 20:
+            rounded_score = max(rounded_score, score_after_over + 5)
+        elif over_number == 20:
+            rounded_score = score_after_over  # Final score should match actual score at 20 overs
+
+       
+
         # Render the result
         return render_template('index.html',
                                prediction_text=f'Predicted Inning Score: {rounded_score}')
